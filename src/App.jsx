@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      {!isMenuOpen && <img src={assets.menu_icon} alt="Menu Icon" onClick={() => setIsMenuOpen(true)} className="absolute top-3 left-3 w-8 h-8 cursor-pointer md:hidden not-dark:invert" />}
+      {!isMenuOpen && <img src={assets.menu_icon} alt="Menu Icon" onClick={() => setIsMenuOpen(true)} className="absolute top-3 left-3 w-8 h-8 cursor-pointer md:hidden not-dark:invert z-10" />}
     
       <div className="dark:bg-linear-to-b from-[#242124] to-[#000000] dark:text-white">
         <div className="flex h-screen w-screen">
