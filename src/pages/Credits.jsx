@@ -18,7 +18,7 @@ export const Credits = () => {
   if (loading) return <Loading />;
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 py-12 mx-auto overflow-y-scroll">
+    <div className="px-4 sm:px-6 lg:px-8 pb-12 mx-auto overflow-y-scroll max-md:mt-14">
       <h2 className="text-3xl text-gray-800 dark:text-white text-center font-semibold mb-10">
         Credit Plans
       </h2>

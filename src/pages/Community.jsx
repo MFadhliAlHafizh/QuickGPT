@@ -18,7 +18,7 @@ export const Community = () => {
   if (loading) return <Loading />;
 
   return (
-    <div className="p-6 pt-12 xl:px-12 2xl:px-20 w-full h-full mx-auto overflow-y-scroll">
+    <div className="p-6 pt-0 md:pt-12 xl:px-12 2xl:px-20 w-full h-full mx-auto overflow-y-scroll max-md:mt-14">
       <h2 className="text-xl font-semibold text-gray-800 dark:text-purple-100 mb-6">
         Community Images
       </h2>

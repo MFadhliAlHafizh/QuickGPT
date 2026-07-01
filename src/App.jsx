@@ -7,8 +7,12 @@ import { useState } from "react"
 import { assets } from "./assets/assets"
 import "./assets/prism.css";
 import { Loading } from "./pages/Loading"
+import { useAppContext } from "./context/AppContext"
+import { Authentication } from "./pages/Authentication"
 
 function App() {
+  const { user } = useAppContext();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {pathname} = useLocation(); 
 
@@ -16,17 +20,23 @@ function App() {
 
   return (
     <>
-      {!isMenuOpen && <img src={assets.menu_icon} alt="Menu Icon" onClick={() => setIsMenuOpen(true)} className="absolute top-3 left-3 w-8 h-8 cursor-pointer md:hidden not-dark:invert z-10" />}
+      {(!isMenuOpen && user) && <img src={assets.menu_icon} alt="Menu Icon" onClick={() => setIsMenuOpen(true)} className="absolute top-3 left-3 w-8 h-8 cursor-pointer md:hidden not-dark:invert z-10" />}
     
       <div className="dark:bg-linear-to-b from-[#242124] to-[#000000] dark:text-white">
-        <div className="flex h-screen w-screen">
-          <Sidebar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-          <Routes>
-            <Route path="/" element={<ChatBox />}></Route>
-            <Route path="/credits" element={<Credits />}></Route>
-            <Route path="/community" element={<Community />}></Route>
-          </Routes>
-        </div>
+        {user ? (
+          <div className="flex h-screen w-screen">
+            <Sidebar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+            <Routes>
+              <Route path="/" element={<ChatBox />}></Route>
+              <Route path="/credits" element={<Credits />}></Route>
+              <Route path="/community" element={<Community />}></Route>
+            </Routes>
+          </div>
+        ) : (
+          <div className="w-screen h-screen flex justify-center items-center bg-linear-to-b from-[#242124] to-[#000000]">
+            <Authentication />
+          </div>
+        )}
       </div>
     </>
   )
