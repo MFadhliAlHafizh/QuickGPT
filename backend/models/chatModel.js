@@ -7,11 +7,11 @@ const chatSchema = new mongoose.Schema(
     name: { type: String, required: true },
     messages: [
       {
-        isImage: { type: String, required: true },
-        isPublished: { type: String, default: false },
+        isImage: { type: Boolean, required: true },
+        isPublished: { type: Boolean, default: false },
         role: { type: String, required: true },
         content: { type: String, required: true },
-        timestamp: { type: String, required: true },
+        timestamp: { type: Number, required: true },
       },
     ],
   },
