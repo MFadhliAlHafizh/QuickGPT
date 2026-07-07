@@ -12,7 +12,7 @@ export const textMessageController = async (req, res) => {
     // Check Credits
     if (req.user.credits < 1) {
       return res.json({
-        status: false,
+        success: false,
         message: "You don't have enough credits to user this feature",
       });
     }
