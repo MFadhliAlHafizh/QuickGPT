@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toFile } from "@imagekit/nodejs";
-import ChatModel from "../models/ChatModel.js";
+import ChatModel from "../models/temp.js";
 import UserModel from "../models/UserModel.js";
 import imagekit from "../configs/imageKit.js";
 import openai from "../configs/openai.js";
