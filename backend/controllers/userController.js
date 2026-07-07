@@ -1,7 +1,7 @@
 import UserModel from "../models/UserModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import ChatModel from "../models/chatModel.js";
+import ChatModel from "../models/ChatModel.js";
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
