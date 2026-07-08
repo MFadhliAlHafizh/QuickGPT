@@ -22,8 +22,8 @@ export const getChats = async (req, res) => {
   try {
     const userId = req.user._id;
 
-    const chat = await ChatModel.find({ userId }).sort({ updatedAt: -1 });
-    return res.json({ success: true, chat });
+    const chats = await ChatModel.find({ userId }).sort({ updatedAt: -1 });
+    return res.json({ success: true, chats });
   } catch (error) {
     return res.json({ success: false, error: error.message });
   }
