@@ -1,14 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 export const Authentication = () => {
   const [state, setState] = useState("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { axios, setToken } = useAppContext();
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
+    const url = state === "login" ? "/api/user/login" : "/api/user/register";
+
+    try {
+      const { data } = await axios.post(url, { name, email, password });
+      if (data.success) {
+        if (state === "login") {
+          setToken(data.token);
+          localStorage.setItem("token", data.token);
+        } else {
+          toast.success(data.message);
+          setState("login");
+        }
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      return toast.error(error.message);
+    }
   };
+
+  useEffect(() => {
+    setName("");
+    setEmail("");
+    setPassword("");
+  }, [state]);  
 
   return (
     <main className="flex items-center justify-center w-full px-4">

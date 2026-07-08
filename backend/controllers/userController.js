@@ -20,17 +20,10 @@ export const userRegister = async (req, res) => {
       return res.json({ success: false, message: "User already exists" });
     }
 
-    const user = await UserModel.create({ name, email, password });
-    const token = generateToken(user._id);
+    await UserModel.create({ name, email, password });
     return res.json({
       success: true,
-      token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        credits: user.credits,
-      },
+      message: "Registration successful. Please sign in.",
     });
   } catch (error) {
     return res.json({ success: false, message: error.message });
