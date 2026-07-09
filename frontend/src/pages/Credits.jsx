@@ -1,13 +1,24 @@
 import { useEffect, useState } from "react";
-import { dummyPlans } from "../assets/assets";
 import { Loading } from "./Loading";
+import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 export const Credits = () => {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { axios } = useAppContext();
 
   const fetcPlans = async () => {
-    setPlans(dummyPlans);
+    try {
+      const { data } = await axios.get("/api/credit/plan");
+      if (data.success) {
+        setPlans(data.plans);
+      } else {
+        toast.error(data.message || "Failed to fetch plans.");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
     setLoading(false);
   };
 
@@ -18,7 +29,7 @@ export const Credits = () => {
   if (loading) return <Loading />;
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 pb-12 mx-auto overflow-y-scroll max-md:mt-14">
+    <div className="px-4 sm:px-6 lg:px-8 pb-12 pt-0 md:pt-12 mx-auto overflow-y-scroll max-md:mt-14">
       <h2 className="text-3xl text-gray-800 dark:text-white text-center font-semibold mb-10">
         Credit Plans
       </h2>
@@ -45,7 +56,10 @@ export const Credits = () => {
                 ))}
               </ul>
             </div>
-            <button className="mt-6 bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white font-medium py-2 rounded transition-colors cursor-pointer">
+            <button
+              onClick={() => toast.error("Sorry, this feature is not yet available")}
+              className="mt-6 bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white font-medium py-2 rounded transition-colors cursor-pointer"
+            >
               Buy Now
             </button>
           </div>

@@ -118,6 +118,7 @@ export const imageMessageController = async (req, res) => {
     await UserModel.findByIdAndUpdate(userId, { $inc: { credits: -2 } });
     return res.status(200).json({ success: true, reply });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ success: false, message: error.message });
   }
 };

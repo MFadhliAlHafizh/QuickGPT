@@ -99,7 +99,7 @@ export const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
                 src={assets.bin_icon}
                 alt="Trash Icon"
                 onClick={e => toast.promise(deleteChatHandler(e, chat._id), {loading: "deleting..."})}
-                className="w-4 hidden group-hover:block not-dark:invert cursor-pointer"
+                className="w-4 md:hidden md:group-hover:block not-dark:invert cursor-pointer"
               />
             </div>
           ))}
@@ -179,7 +179,7 @@ export const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
           src={assets.logout_icon}
           alt="Logout Icon"
           onClick={logoutHandler}
-          className="h-5 hidden group-hover:block cursor-pointer not-dark:invert"
+          className="h-5 md:hidden md:group-hover:block cursor-pointer not-dark:invert"
         />
       </div>
 
