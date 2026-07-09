@@ -34,22 +34,22 @@ export const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
 
   return (
     <div
-      className={`flex flex-col min-w-72 h-screen p-5 dark:bg-linear-to-b from-[#242124]/30 to-[#000000]/30 border-r border-[#80609F] transition-all duration-500 backdrop-blur-3xl max-md:absolute left-0 z-1 ${!isMenuOpen && "max-md:-translate-x-full"}`}
+      className={`flex flex-col min-w-72 h-screen p-5 bg-white/70 dark:bg-[#131018]/75 backdrop-blur-3xl border-r border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.25)] transition-all duration-500 max-md:absolute left-0 z-10 ${!isMenuOpen && "max-md:-translate-x-full"}`}
     >
       {/* Logo */}
       <img
         src={theme === "dark" ? assets.logo_full : assets.logo_full_dark}
         alt="Logo"
-        className="w-full max-w-48"
+        className="w-full max-w-42 drop-shadow-lg"
       />
 
       {/* Button */}
-      <button onClick={createNewChat} className="flex justify-center items-center py-2 mt-10 w-full bg-linear-to-b from-[#A456F7] to-[#3D81F6] rounded-md text-white cursor-pointer">
+      <button onClick={createNewChat} className="flex justify-center items-center w-full py-1.5 mt-10 rounded-md bg-linear-to-r from-violet-500 via-fuchsia-500 to-blue-500 text-sm text-white font-sm shadow-lg hover:shadow-violet-500/40 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer">
         <span className="text-xl mr-2">+</span>New Chat
       </button>
 
       {/* Search Input */}
-      <div className="flex items-center gap-2 p-3 mt-4 border border-gray-400 dark:border-white/20 rounded-md">
+      <div className="flex items-center gap-2 p-3 mt-2.5 bg-white/5 dark:bg-white/5 backdrop-blur-xl border border-gray-300 dark:border-white/10 rounded-md shadow-sm">
         <img
           src={assets.search_icon}
           alt="Search Icon"
@@ -60,13 +60,13 @@ export const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
           onChange={(e) => setSearch(e.target.value)}
           value={search}
           placeholder="Search conversations..."
-          className="text-xs placeholder:text-gray-400 outline-none"
+          className="flex-1 bg-transparent text-xs placeholder:text-gray-400 outline-none"
         />
       </div>
 
       {/* Recent Chats */}
       {chats.length > 0 && <p className="mt-4 text-sm">Recent Chats</p>}
-      <div className="flex-1 overflow-y-scroll mt-3 text-sm space-y-3">
+      <div className="flex-1 overflow-y-auto mt-3 pr-1 text-sm space-y-3">
         {chats
           .filter((chat) =>
             chat.messages[0]
@@ -83,15 +83,15 @@ export const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
                 setSelectedChat(chat);
                 setIsMenuOpen(false);
               }}
-              className="flex justify-between py-2 px-4 border border-gray-300 dark:bg-[#57317C]/10 dark:border-[#80609F]/15 rounded-md cursor-pointer group"
+              className="group flex justify-between items-center p-2 rounded-md bg-gray-200/40 dark:bg-[#57317C]/15 border border-gray-300 dark:border-white/10 hover:bg-violet-500/10 hover:border-violet-500/30 transition-all cursor-pointer shadow-sm"
             >
               <div>
-                <p className="truncate w-full">
+                <p className="truncate w-full text-xs font-medium">
                   {chat.messages.length > 0
                     ? chat.messages[0].content.slice(0, 32)
                     : chat.name}
                 </p>
-                <p className="text-xs text-gray-500 dark:text-[#B1A6C0]">
+                <p className="mt-1 text-[10px] text-gray-500 dark:text-gray-400">
                   {moment(chat.updatedAt).fromNow()}
                 </p>
               </div>
@@ -99,7 +99,7 @@ export const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
                 src={assets.bin_icon}
                 alt="Trash Icon"
                 onClick={e => toast.promise(deleteChatHandler(e, chat._id), {loading: "deleting..."})}
-                className="w-4 md:hidden md:group-hover:block not-dark:invert cursor-pointer"
+                className="w-4 opacity-0 md:opacity-0 md:group-hover:opacity-100 hover:scale-110 transition-all cursor-pointer not-dark:invert"
               />
             </div>
           ))}
@@ -111,14 +111,14 @@ export const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
           navigate("/community");
           setIsMenuOpen(false);
         }}
-        className="flex items-center gap-2 p-3 mt-4 text-sm border border-gray-300 dark:border-white/15 rounded-md transition-all hover:scale-103 cursor-pointer"
+        className="group flex items-center gap-2 p-3 mt-4 text-sm rounded-md bg-white/5 border border-gray-300 dark:border-white/10 hover:bg-violet-500/10 hover:border-violet-500/30 hover:scale-[1.02] transition-all cursor-pointer"
       >
         <img
           src={assets.gallery_icon}
           alt="Gallery Icon"
-          className="w-4.5 not-dark:invert"
+          className="w-4 not-dark:invert"
         />
-        <p>Community Images</p>
+        <p className="text-xs">Community Images</p>
       </div>
 
       {/* Credit Purchase Option */}
@@ -127,30 +127,30 @@ export const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
           navigate("/credits");
           setIsMenuOpen(false);
         }}
-        className="flex items-center gap-2 p-3 mt-4 text-sm border border-gray-300 dark:border-white/15 rounded-md transition-all hover:scale-103 cursor-pointer"
+        className="group flex items-center gap-2 p-3 mt-2.5 text-sm rounded-md bg-white/5 border border-gray-300 dark:border-white/10 hover:bg-violet-500/10 hover:border-violet-500/30 hover:scale-[1.02] transition-all cursor-pointer"
       >
         <img
           src={assets.diamond_icon}
           alt="Diamond Icon"
-          className="w-4.5 dark:invert"
+          className="w-4 dark:invert"
         />
         <div className="flex flex-col text-sm">
-          <p>Credits : {user?.credits}</p>
-          <p className="text-xs text-gray-400">
+          <p className="text-xs">Credits : {user?.credits}</p>
+          <p className="text-[10px] text-gray-400">
             Purchase credits to use QuickGPT
           </p>
         </div>
       </div>
 
       {/* Dark Mode */}
-      <div className="flex items-center justify-between gap-2 p-3 mt-4 border border-gray-300 dark:border-white/15 rounded-md">
+      <div className="flex items-center justify-between gap-2 p-3 mt-2.5 rounded-md bg-white/5 border border-gray-300 dark:border-white/10 shadow-sm">
         <div className="flex items-center gap-2 text-sm">
           <img
             src={assets.theme_icon}
             alt="Theme Icon"
-            className="w-4.5 not-dark:invert"
+            className="w-4 not-dark:invert"
           />
-          <p>Dark Mode</p>
+          <p className="text-xs">{theme === "dark" ? "Light Mode" : "Dark Mode"}</p>
         </div>
 
         <label className="relative inline-flex cursor-pointer">
@@ -166,20 +166,20 @@ export const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
       </div>
 
       {/* User Account */}
-      <div className="flex items-center gap-3 p-3 mt-4 text-sm border border-gray-300 dark:border-white/15 rounded-md cursor-pointer group">
+      <div className="group flex items-center gap-3 p-3 mt-2.5 text-sm rounded-md bg-white/5 border border-gray-300 dark:border-white/10 hover:bg-violet-500/10 hover:border-violet-500/30 transition-all cursor-pointer">
         <img
           src={assets.user_icon}
           alt="User Icon"
-          className="w-7 rounded-full"
+          className="w-5 rounded-full ring-2 ring-violet-400"
         />
-        <p className="flex-1 text-sm dark:text-primary truncate">
+        <p className="flex-1 text-sm font-medium dark:text-primary truncate">
           {user ? user.name : "Login your account"}
         </p>
         <img
           src={assets.logout_icon}
           alt="Logout Icon"
           onClick={logoutHandler}
-          className="h-5 md:hidden md:group-hover:block cursor-pointer not-dark:invert"
+          className="h-5 opacity-0 md:opacity-0 md:group-hover:opacity-100 hover:scale-110 transition-all cursor-pointer not-dark:invert"
         />
       </div>
 
@@ -188,7 +188,7 @@ export const Sidebar = ({ isMenuOpen, setIsMenuOpen }) => {
         src={assets.close_icon}
         alt="Close Icon"
         onClick={() => setIsMenuOpen(false)}
-        className="absolute top-3 right-3 w-5 h-5 cursor-pointer md:hidden not-dark:invert"
+        className="absolute top-3 right-3 w-5 h-5 cursor-pointer md:hidden opacity-70 hover:opacity-100 hover:rotate-90 transition-all not-dark:invert"
       />
     </div>
   );

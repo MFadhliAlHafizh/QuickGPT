@@ -30,8 +30,8 @@ export const Community = () => {
   if (loading) return <Loading />;
 
   return (
-    <div className="p-6 pt-0 md:pt-12 xl:px-12 2xl:px-20 w-full h-full mx-auto overflow-y-scroll max-md:mt-14">
-      <h2 className="text-xl font-semibold text-gray-800 dark:text-purple-100 mb-6">
+    <div className="w-full h-full mx-auto overflow-y-auto p-6 md:pt-10 xl:px-12 2xl:px-20 max-md:mt-16 scroll-smooth">
+      <h2 className="mb-8 text-3xl font-bold tracking-tight text-gray-800 dark:text-white">
         Community Images
       </h2>
       {images.length > 0 ? (
@@ -41,21 +41,22 @@ export const Community = () => {
               key={index}
               href={item.imageUrl}
               target="_blank"
-              className="group relative block border border-gray-200 dark:border-purple-700 shadow-sm hover:shadow-md transition-shadow rounded-lg overflow-hidden"
+              className="group relative block overflow-hidden rounded-lg bg-white dark:bg-[#1A1624]/80 backdrop-blur-xl border border-gray-200 dark:border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_40px_rgba(124,58,237,0.20)] transition-all duration-300 hover:-translate-y-1"
             >
               <img
                 src={item.imageUrl}
                 alt="Community Images"
-                className="w-full h-60 md:h-50 2xl:h-62 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"
+                className="w-full h-60 md:h-50 2xl:h-62 object-cover transition-transform duration-500 ease-in-out"
               />
-              <p className="absolute bottom-0 right-0 text-xs bg-black/50 backdrop-blur text-white px-4 py-1 rounded-tl-xl opacity-0 group-hover:opacity-100 transition duration-300">
+              <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+              <p className="absolute inset-x-0 bottom-0 px-4 py-3 bg-linear-to-t from-black/80 via-black/40 to-transparent text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300">
                 Created by {item.userName}
               </p>
             </a>
           ))}
         </div>
       ) : (
-        <p className="text-center text-gray-600 dark:text-purple-200 mt-10">
+        <p className="mt-24 text-center text-lg text-gray-500 dark:text-gray-400">
           No Images Available.
         </p>
       )}

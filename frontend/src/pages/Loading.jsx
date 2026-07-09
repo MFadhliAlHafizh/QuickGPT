@@ -15,8 +15,8 @@ export const Loading = () => {
   }, []);
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-linear-to-b from-[#531B81] to-[#29184B] backdrop-opacity-60 text-white text-2xl">
-      <div className="w-10 h-10 rounded-full border-3 border-white border-t-transparent animate-spin"></div>
+    <div className="relative flex h-screen w-screen items-center justify-center overflow-hidden bg-linear-to-br from-[#09090B] via-[#1A1624] to-[#2E1065] text-white">
+      <div className="relative z-10 h-14 w-14 rounded-full border-4 border-violet-300/30 border-t-violet-400 shadow-[0_0_30px_rgba(168,85,247,0.45)] animate-spin"></div>
     </div>
   );
 };

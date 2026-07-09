@@ -38,15 +38,15 @@ export const Authentication = () => {
   }, [state]);  
 
   return (
-    <main className="flex items-center justify-center w-full px-4">
-      <form onSubmit={onSubmitHandler} className="flex w-full flex-col max-w-125 px-8 py-4 bg-[#57317C]/30 rounded-lg border border-[#80609F]/30">
-        <img src="/favicon.svg" alt="Logo" className="w-12 mb-4 mx-auto" />
+    <main className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-linear-to-br from-[#09090B] via-[#1A1624] to-[#2E1065] px-4">
+      <form onSubmit={onSubmitHandler} className="flex w-full max-w-125 flex-col rounded-3xl border border-white/10 bg-white/5 px-10 py-8 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.35)]">
+        <img src="/favicon.svg" alt="Logo" className="mx-auto mb-5 w-16 drop-shadow-[0_0_25px_rgba(168,85,247,.45)]" />
 
-        <h2 className="text-4xl font-medium text-white text-center">
+        <h2 className="text-center text-4xl font-bold tracking-tight text-white">
           {state === "login" ? "Sign In" : "Sign Up"}
         </h2>
 
-        <p className="mt-2 mb-6 text-base text-gray-300 text-center">
+        <p className="mt-3 mb-8 text-center leading-6 text-gray-400">
           {state === "login"
             ? "Please enter email and password to access."
             : "Please provide your details to create an account."}
@@ -54,12 +54,12 @@ export const Authentication = () => {
 
         {state === "register" && (
           <div className="mb-4">
-            <label className="font-medium text-white">Name</label>
+            <label className="font-medium tracking-wide text-gray-200">Name</label>
             <input
               onChange={(e) => setName(e.target.value)}
               value={name}
               placeholder="Please enter your name"
-              className="mt-2 text-gray-300 rounded-md ring ring-gray-400 focus:ring-2 focus:ring-indigo-600 outline-none px-3 py-2 w-full"
+              className="mt-2 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-white placeholder:text-gray-500 outline-none transition-all focus:border-violet-400 focus:ring-2 focus:ring-violet-500/30"
               required
               type="name"
               name="name"
@@ -68,12 +68,12 @@ export const Authentication = () => {
         )}
 
         <div>
-          <label className="font-medium text-white">Email</label>
+          <label className="font-medium tracking-wide text-gray-200">Email</label>
           <input
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             placeholder="Please enter your email"
-            className="mt-2 text-gray-300 rounded-md ring ring-gray-400 focus:ring-2 focus:ring-indigo-600 outline-none px-3 py-2 w-full"
+            className="mt-2 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-white placeholder:text-gray-500 outline-none transition-all focus:border-violet-400 focus:ring-2 focus:ring-violet-500/30"
             required
             type="email"
             name="email"
@@ -81,12 +81,12 @@ export const Authentication = () => {
         </div>
 
         <div className="mt-4">
-          <label className="font-medium text-white">Password</label>
+          <label className="font-medium tracking-wide text-gray-200">Password</label>
           <input
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             placeholder="Please enter your password"
-            className="mt-2 text-gray-300 rounded-md ring ring-gray-400 focus:ring-2 focus:ring-indigo-600 outline-none px-3 py-2 w-full"
+            className="mt-2 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-white placeholder:text-gray-500 outline-none transition-all focus:border-violet-400 focus:ring-2 focus:ring-violet-500/30"
             required
             type="password"
             name="password"
@@ -95,26 +95,26 @@ export const Authentication = () => {
 
         <button
           type="submit"
-          className="mt-6 py-2 w-full cursor-pointer rounded-md bg-indigo-600 text-white transition hover:bg-indigo-700"
+          className="mt-8 w-full rounded-xl bg-linear-to-r from-violet-500 via-fuchsia-500 to-blue-500 py-3 font-semibold text-white shadow-lg hover:shadow-violet-500/40 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
         >
           {state === "login" ? "Sign In" : "Sign Up"}
         </button>
         {state === "register" ? (
-          <p className="text-center text-gray-300 py-2">
+          <p className="pt-2 text-center text-gray-400">
             Already have account?{" "}
             <span
               onClick={() => setState("login")}
-              className="text-purple-400 cursor-pointer hover:underline"
+              className="font-medium text-purple-400 transition-colors hover:text-purple-300 hover:underline cursor-pointer"
             >
               click here
             </span>
           </p>
         ) : (
-          <p className="text-center text-gray-300 py-2">
+          <p className="pt-2 text-center text-gray-400">
             Create an account?{" "}
             <span
               onClick={() => setState("register")}
-              className="text-purple-400 cursor-pointer hover:underline"
+              className="font-medium text-purple-400 transition-colors hover:text-purple-300 hover:underline cursor-pointer"
             >
               click here
             </span>
